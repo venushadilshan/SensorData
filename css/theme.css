@@ -5,7 +5,64 @@ body{
 .flex-container
 {
     display: flex;
+
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.menu-bar
+{
+    
+    display: grid;
+    
+    
+}
+
+.custom-card
+{
+    margin:10px;
+    background-color: #222A3F;
+    width: 100%;
+    padding:15px;
+    border-radius:5px;
+  height: 35vh;
+   
+}
+
+.custom-card h5
+{
+    color: white;
+    font-weight: 300;
+    font-size:1em;
+}
+
+.custom-card hr{
+    border-color: white;
+}
+
+.custom-card p{
+    color: white;
+    font-size: 0.7em;
+    margin-top: 2px;
+}
+
+.grid-container
+{
+    display: grid;
+    justify-items: stretch;
+    grid-auto-flow: dense;
+  }
+
+  .stat-card
+  {
+    background-color: #479D5C;
+    font-size: 3em;  
+    height: 60%;
+    padding:10px;
+    border-radius: 5px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
+  }
