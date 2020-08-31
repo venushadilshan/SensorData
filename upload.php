@@ -42,14 +42,25 @@ if(isset($_POST["submit"]))
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="css/theme.css">
+    <title>Dashboard</title>
   </head>
   <body>
-    <form method="POST" enctype="multipart/form-data">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <div class="menu-bar">
+            
+          </div>
+        </div>
+        <div class="col-9">
+          <form method="POST" enctype="multipart/form-data">
     <input type="file" name="file" >
     <input type="submit" name="submit" value="Upload">
-    </form>
+    </form></div>
+      </div>
+    </div>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
