@@ -10,21 +10,62 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="css/theme.css" />
 
-  <title>Hello, world!</title>
+  <title>Report Generator</title>
 </head>
 
 <body>
-  <script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: transparent;">
+    <a class="navbar-brand" href="#">Sensor Data Management System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  </script>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="upload.php">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="reportUi.php">Reports</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
   <div class="container flex-container">
-    <div class="main-container ">
+    <div class="main-container" style="background-color: #222A3F; padding:20px; color:white; border-radius:10px;">
       <form method="POST" action="setCookie.php">
         <div class="form-group">
           <label for="exampleInputEmail1">Category:</label>
-          <input type="text" class="form-control" id="category" name="category" aria-describedby="emailHelp">
+        
+          
+          <select class="custom-select" id="category" name="category">
+    <option selected>Choose...</option>
+    <option value="dust">Dust</option>
+    <option value="temp">Temperature</option>
+    <option value="co2">CO2</option>
+    <option value="humidity">Humidity</option>
+    <option value="light">Light</option>
+  </select>
 
 
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Data Set:</label>
+        
+        
+          <select class="custom-select" id="dataRange" name="dataRange">
+    <option selected>Choose...</option>
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="100">100</option>
+    <option value="200">200</option>
+    <option value="500">500</option>
+    <option value="ALL">ALL</option>
+  </select>
+  <small id="emailHelp" class="form-text text-muted">Larger datasets can cause loading lags and crashes.</small>
 
         </div>
 
@@ -38,7 +79,7 @@
 
         </div>
         <div class="form-group">
-          <label for="exampleInputEmail1">Date Range:</label>
+          
       
          
           <input type="date" class="form-control" id="lDate" name="lDate" aria-describedby="emailHelp">

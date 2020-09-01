@@ -27,7 +27,7 @@ body{
     width: 100%;
     padding:15px;
     border-radius:5px;
-  height: 35vh;
+  
    
 }
 
@@ -65,4 +65,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .report-card
+  {
+    background-color: #222A3F;
   }
