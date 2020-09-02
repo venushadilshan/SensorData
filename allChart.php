@@ -36,6 +36,12 @@
     </nav>
 
     <div class="container main-container text-center" style="width: 100%; height:95vh; margin-top:40px; ">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong >Tip! </strong> Click on a Category Label to Filter the Chart.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
         <canvas id="myChart" style="background-color: #222A3F; padding:10px;" width="100%"></canvas>
 
     </div>
@@ -56,6 +62,10 @@
 
         var x = [];
         var y = [];
+        var y2 = [];
+        var y3 = [];
+        var y4 = [];
+        var y5 = [];
         //JSON read
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
@@ -72,28 +82,13 @@
 
                     x.push(obj.time);
                     //decide the category by cookies value
-                    if (getCookie('category') == 'dust') {
-                        //if it is equals to particular category, the valuyes are push to the y array
-                        y.push(obj.dust)
-                        
-                        
-                    }
+                    y.push(obj.dust);
+                    y2.push(obj.temp);
+                    y3.push(obj.co2);
+                    y4.push(obj.light);
+                    y5.push(obj.humidity);
 
-                    if (getCookie('category') == 'temp') {
-                        y.push(obj.temp)
-                    }
 
-                    if (getCookie('category') == 'co2') {
-                        y.push(obj.co2)
-                    }
-
-                    if (getCookie('category') == 'humidity') {
-                        y.push(obj.humidity)
-                    }
-
-                    if (getCookie('category') == 'light') {
-                        y.push(obj.light)
-                    }
 
                 }
 
@@ -109,20 +104,102 @@
                         //x axis
                         labels: x,
                         datasets: [{
-                            label: clabel,
-                            data: y,
-                            backgroundColor: [
+                                label: 'Dust',
+                                data: y,
+                                backgroundColor: [
 
-                                'rgba(54, 162, 235,0.5)'
+                                    'rgba(255, 99, 132, 1)'
 
-                            ],
-                            borderColor: [
 
-                                'rgba(54, 162, 235, 1)',
+                                ],
+                                borderColor: [
 
-                            ],
-                            borderWidth: 1
-                        }]
+                                    'rgba(255, 99, 132, 1)'
+
+
+                                ],
+                                borderWidth: 1
+
+
+                            },
+
+                            {
+                                label: 'Temperature',
+                                data: y2,
+                                backgroundColor: [
+
+
+                                    'rgba(54, 162, 235, 1)'
+
+                                ],
+                                borderColor: [
+
+
+                                    'rgba(54, 162, 235, 1)'
+
+                                ],
+                                borderWidth: 1
+
+
+                            },
+                            {
+                                label: 'CO2',
+                                data: y3,
+                                backgroundColor: [
+
+
+                                    'rgba(71, 157, 92, 1)'
+
+                                ],
+                                borderColor: [
+
+
+                                    'rgba(71, 157, 92, 1)'
+
+                                ],
+                                borderWidth: 1
+
+
+                            },
+                            {
+                                label: 'Humidity',
+                                data: y5,
+                                backgroundColor: [
+
+
+                                    'rgba(255, 206, 86)'
+
+                                ],
+                                borderColor: [
+
+
+                                    'rgba(255, 206, 86)'
+
+                                ],
+                                borderWidth: 1
+
+
+                            },
+                            {
+                                label: 'Light',
+                                data: y4,
+                                backgroundColor: [
+
+
+                                    'rgba(80, 10, 112)'
+
+                                ],
+                                borderColor: [
+
+
+                                    'rgba(80, 10, 112)'
+
+                                ],
+                                borderWidth: 1
+
+
+                            }
+                        ]
                     },
                     options: {
                         scales: {
@@ -150,6 +227,10 @@
     <script>
 
     </script>
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 
 </html>

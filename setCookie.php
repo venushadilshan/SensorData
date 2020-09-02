@@ -1,7 +1,9 @@
 <?php
+//settting cookies for category and date range. All cokkis are read by chart.php
 $cookie_name = "category";
 $cookie_value =  $_POST['category'];
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
 
 $cookie_name = "fDate";
 $cookie_value =  $_POST['fDate'];
@@ -14,10 +16,17 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1
 $cookie_name = "dr";
 $cookie_value =  $_POST['dataRange'];
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+ if ( $_POST['category']=='all')
+ {
+    header("Location:allChart.php");
+ }
 
-echo  $_POST['category'];
-//echo "<script type = 'text/javascript'> window.location.replace('chart.php'); </script>";
-header("Location:chart.php");
+//redirect to the chart
+
+else{
+    header("Location:chart.php");
+}
+
 
 
 ?>

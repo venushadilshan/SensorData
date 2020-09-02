@@ -1,6 +1,6 @@
 
 <?php
-
+//this script select the data from the database and encode it into JSON 
 header('Content-Type: application/json');
 $category =  $_COOKIE["category"];
 $del = ' 00:00:00';
@@ -12,6 +12,7 @@ $dr =  $_COOKIE["dr"];
 //echo $_POST['category'];
 if($dr == '5')
 {
+	//filtering to data set. high number of records may crash the browser
 	$sqlQuery = "select time,$category from info where time>='$fDate' AND time<'$lDate' limit 5";
 }
 
@@ -31,6 +32,11 @@ if($dr == '200')
 if($dr == 'ALL')
 {
 	$sqlQuery = "select time,$category from info where time>='$fDate' AND time<'$lDate'";
+}
+
+if ($category== 'all') 
+{
+	$sqlQuery = "select * from info where time>='$fDate' AND time<'$lDate' limit 100";
 }
 
 

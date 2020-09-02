@@ -1,46 +1,4 @@
-<script>
-  function addClass() {
-    var v = document.getElementById("upAlert");
-    v.className += "show";
-  }
-</script>
-<?php
-//venusha 2020 All Rights Reserved. www.venusha.com
-$connect = mysqli_connect("localhost", "root", "", "ac");
-$temp;
-$humidity;
-$co2;
-$power;
-$light;
-$dust2;
-if (isset($_POST["submit"])) {
-  if ($_FILES['file']['name']) {
-    $filename = explode('.', $_FILES['file']['name']);
-    if ($filename[1] == 'csv') {
-      $handle = fopen($_FILES['file']['tmp_name'], "r");
-      fgetcsv($handle);
-      while ($data = fgetcsv($handle)) {
-        //getting columns of the database
-        $time = mysqli_real_escape_string($connect, $data[0]);
-        $power = mysqli_real_escape_string($connect, $data[1]);
-        $temp = mysqli_real_escape_string($connect, $data[2]);
-        $humidity = mysqli_real_escape_string($connect, $data[3]);
-        $light = mysqli_real_escape_string($connect, $data[4]);
-        $co2 = mysqli_real_escape_string($connect, $data[5]);
-        $dust = mysqli_real_escape_string($connect, $data[6]);
 
-        $sql = "INSERT INTO info (time,power,temp,humidity,light,co2,dust) VALUES ('$time','$power','$temp','$humidity','$light','$co2','$dust')";
-        mysqli_query($connect, $sql);
-      }
-      fclose($handle);
-      //show alert when upload success
-      echo "<script type='text/javascript'>',
-      alert('Uploaded');,
-      '</script>";
-    }
-  }
-}
-?>
 
 <!doctype html>
 <html lang="en">
@@ -67,10 +25,14 @@ if (isset($_POST["submit"])) {
   <script>
     AOS.init();
   </script>
+<script>
+  function addClass() {
+    var v = document.getElementById("upAlert");
+    v.className += "show";
+  }
+</script>
 
-
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: transparent;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: transparent;">
     <a class="navbar-brand" href="#">Sensor Data Management System</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -89,9 +51,75 @@ if (isset($_POST["submit"])) {
 
     </div>
   </nav>
-  <div class="container-fluid ">
+<?php
+//venusha 2020 All Rights Reserved. www.venusha.com
+$connect = mysqli_connect("localhost", "root", "", "ac");
+$temp;
+$humidity;
+$co2;
+$power;
+$light;
+$dust2;
+if (isset($_POST["submit"])) {
+ 
+  if ($_FILES['file']['name']) {
+    $filename = explode('.', $_FILES['file']['name']);
+    if ($filename[1] == 'csv') {
+      $handle = fopen($_FILES['file']['tmp_name'], "r");
+      fgetcsv($handle);
+      while ($data = fgetcsv($handle)) {
+        //getting columns of the database
+        $time = mysqli_real_escape_string($connect, $data[0]);
+        $power = mysqli_real_escape_string($connect, $data[1]);
+        $temp = mysqli_real_escape_string($connect, $data[2]);
+        $humidity = mysqli_real_escape_string($connect, $data[3]);
+        $light = mysqli_real_escape_string($connect, $data[4]);
+        $co2 = mysqli_real_escape_string($connect, $data[5]);
+        $dust = mysqli_real_escape_string($connect, $data[6]);
 
-    <div class="row">
+        $sql = "INSERT INTO info (time,power,temp,humidity,light,co2,dust) VALUES ('$time','$power','$temp','$humidity','$light','$co2','$dust')";
+        mysqli_query($connect, $sql);
+      }
+      fclose($handle);
+      //show alert when upload success
+    //  echo "<script type='text/javascript'>',alert('Uploaded');, '</script>";
+
+      echo "  <div class='alert alert-success alert-dismissible fade show' role='alert' style='margin-left:20%; margin-top:20px; margin-right:20%;'>
+      <strong >Alert! </strong>Your CSV is uploaded successfully to the database.
+      <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        <span aria-hidden='true'>&times;</span>
+      </button>
+    </div>" ;
+    }
+  }
+}
+?>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Your CSV is uploading to the database. You will be notified after the operation completed. 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="container-fluid " >
+
+    <div class="row" style="padding: 20px;">
 
 
       <!-- upload csv UI-->
@@ -105,7 +133,7 @@ if (isset($_POST["submit"])) {
             <input type="file" name="file" style="color: white; width:100%; border:0px; background:#E5E5E5;">
 
 
-            <input type="submit" name="submit" class="btn btn-primary" style="width: 100%; margin-top:50px; margin-bottom:60px;" value="Upload ">
+            <input data-toggle="modal" data-target="#exampleModal" type="submit" name="submit" class="btn btn-primary" style="width: 100%; margin-top:50px; margin-bottom:60px;" value="Upload ">
           </form>
         </div>
 
@@ -183,6 +211,12 @@ if (isset($_POST["submit"])) {
         <div class="custom-card" data-aos="fade-up" data-aos-duration="1900">
 
           <p> Recent Data Analysis </p>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong >Tip! </strong> Click on a Category Label to Filter the Chart.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
           <canvas id="myChart" height="150%"></canvas> <br>
           <a href="reportUi.php"> <button class="btn btn-success" style="width:100%">Detailed Report</button></a>
 
@@ -199,7 +233,7 @@ if (isset($_POST["submit"])) {
           data: {
             labels: ['Temp', 'Dust', 'CO2', 'Humidity', 'Power', 'Light'],
             datasets: [{
-              label: 'Dust',
+             
               data: ["<?php echo $temp; ?>", "<?php echo $temp; ?>", "<?php echo $light; ?>", "<?php echo $power; ?>", "<?php echo $dust2; ?>", "<?php echo $co2; ?>"],
               backgroundColor: [
                 'rgba(255, 99, 132, 1)',
@@ -256,7 +290,7 @@ if (isset($_POST["submit"])) {
           data: {
             labels: ['Temperature'],
             datasets: [{
-              label: 'Temprarure',
+              label: 'Temperature C',
               data: ["<?php echo $temp; ?>"],
               backgroundColor: [
                 'rgba(255, 99, 132, 1)',

@@ -42,6 +42,7 @@
           
           <select class="custom-select" id="category" name="category">
     <option selected>Choose...</option>
+    <option value="all">ALL</option>
     <option value="dust">Dust</option>
     <option value="temp">Temperature</option>
     <option value="co2">CO2</option>
